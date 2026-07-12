@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>From Research to First Message — Nora Murphy</title>
+<meta name="description" content="The buildable workflow that turns the onboarding insight into a shippable design artifact.">
+<link rel="preconnect" href="">
+<link rel="stylesheet" href="assets/style.css">
+
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="brand" href="index.html">Nora Murphy <span>· research program</span></a>
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><span class="sep">/</span><span class="here">From Research to First Message</span></nav>
+  </div>
+</header>
+<main id="main">
+<div class="wrap"><div class="doc-head"><p class="eyebrow">Workflow <span class="tag tag--design">design</span></p><h1>From Research to First Message</h1><p class="subtitle">A conversational design workflow for AI onboarding, built from original research and cross-platform testing</p><div class="meta"><span><b>Author</b> Nora Murphy</span><span><b>Methods</b> Conversation Design Institute (CxD1, CxD2) · UX research (Google)</span><span><b>Date</b> February 2026</span></div></div></div><article class="doc-body design"><div class="wrap"><p>Research identifies the problem. A case study proves the solution is possible. But neither of those things ship a product. Between the insight and the interface, there is a process — the part where ideas become repeatable, testable, and buildable by a team that wasn&#x27;t in the room when the thinking happened.</p>
+<p>This page documents that process. It is not the exciting part. It is the part that makes the exciting part usable.</p>
+<p>The workflow below follows the design of a single artifact: the first message an AI sends to a new user. That message has to do several things at once — explain what the system is, demonstrate what it does well, be honest about its limits, teach the user how to prompt effectively, and do all of this in under sixty seconds of reading time without feeling like a terms-of-service page.</p>
+<p>Each step references work from elsewhere in this portfolio. The research grounding comes from The Literal Machine. The cross-platform validation comes from The Onboarding Problem. The understanding of how interaction patterns shape model output comes from Contextual Drift in LLMs. This workflow is where those three threads converge into something a product team could actually build.</p>
+<span class="kicker">Step 01</span>
+<h3><strong>Research and Mental Model Mapping</strong></h3>
+<p>Before designing the message, I needed to understand what users bring to the interaction before they type a single word. The core problems are documented in <em>The Literal Machine</em>: users treat AI like a search engine because it looks like one, project emotions onto it because it sounds human, and blame themselves for bad results because nobody told them the prompt was the variable.</p>
+<p>These are not random complaints. They are predictable consequences of a missing onboarding step. Every one of them traces back to the same gap: the user was never told what the system is, how it differs from what they expect, or how to use it effectively.</p>
+<p>From The Literal Machine, I added a second layer: the way users phrase prompts carries unconscious signal — emotional posture, ego positioning, reciprocity demands — that models mirror back with high fidelity. Contextual Drift in LLMs then shows how that mirroring, sustained across turns, hardens into an inherited frame. Users don&#x27;t realize they are shaping the output with the parts of their language they aren&#x27;t paying attention to. This means onboarding needs to address not just what users should ask, but how the way they ask changes what they get back.</p>
+<p><strong>Friction points mapped at first contact:</strong> No explanation of what the system is. No distinction from search. No transparency about limits. No prompt guidance. No examples of what works and what doesn&#x27;t. No acknowledgment that the user&#x27;s phrasing affects output quality.</p>
+<span class="kicker">Step 02</span>
+<h3><strong>Cross-Platform Prompt Testing</strong></h3>
+<p>The intervention I proposed in the essay — let the model send the first message — needed to be tested. Not in theory, but across real systems with different architectures, training data, and alignment philosophies.</p>
+<p>I wrote a single natural-language prompt and sent it identically to four frontier models: Claude, ChatGPT, Gemini, and Grok — each through its ordinary consumer product, no prompt-engineering tricks, no chain-of-thought formatting, no persona scaffolding. One prompt. Four outputs. The full comparison is documented in <a href="the-onboarding-problem.html">the case study</a>.</p>
+<p>The purpose was not to find the best model. It was to test whether the concept works at all — whether a clear, well-structured prompt can produce a usable onboarding message from any system, regardless of who built it. The answer was yes, from all four. Every response covered the core requirements: self-identification, capability overview, honest limits, prompt examples, and an invitation to experiment.</p>
+<p>The differences between the four responses were as informative as the similarities. Each model&#x27;s output reflected its company&#x27;s design philosophy in ways the prompt didn&#x27;t ask for. That tells you something important about cross-platform design: the same clear intent, communicated cleanly, produces different but uniformly functional results. You don&#x27;t need a different strategy for every model. You need a strategy that communicates well enough to work across all of them.</p>
+<span class="kicker">Step 03</span>
+<h3><strong>Dialogue Flow and Branching Design</strong></h3>
+<p>A welcome message is not a static block of text. It is the first turn of a conversation, and conversations branch. The user might read the whole thing. They might skim. They might already know what AI is and want to skip ahead. They might be in emotional distress and need to be redirected before they start treating the model as a therapist.</p>
+<p>The first-message flow was designed as a guided sandbox with clear escape hatches:</p>
+<ul>
+<li><strong>Linear welcome path:</strong> For genuinely new users who need the full explanation. This is the default — the message as designed in the case study, delivered in a scannable, section-by-section format.</li>
+<li><strong>Skip option:</strong> A visible &quot;Got it, let&#x27;s go&quot; escape for users who don&#x27;t need the walkthrough. Respecting the user&#x27;s time is part of the design, not an afterthought.</li>
+<li><strong>Tappable starter prompts:</strong> Instead of leaving the user staring at a blank text box after reading the welcome message, offer two or three pre-written prompts they can tap to try immediately. These serve as the first &quot;crafting recipe&quot; — a working example they can modify rather than an empty page they have to fill from scratch.</li>
+<li><strong>Edge-case branches:</strong> If the user&#x27;s first message signals emotional distress, the system acknowledges the person first, then points toward real support rather than posing as it — though how warm that acknowledgment should be, and how fast to hand off, is a live design judgment, not a settled rule. If the user asks something impossible, the system explains why rather than attempting it. If the user is clearly experienced, the system adjusts depth rather than repeating basics.</li>
+</ul>
+<p><strong>Design principle:</strong> The user should never reach a dead end. Every path through the first interaction leads to either a useful output or a clear next step. The goal is not to control the conversation but to make sure the first few turns are productive regardless of what the user brings to them.</p>
+
+<style>
+.fm-art{margin:26px 0 4px}
+.fm-art .fm-k{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--teal,#0d7a6f);font-weight:700;margin:0 0 6px}
+.fm-art .fm-lead{color:var(--ink-3,#475569);font-size:14px;line-height:1.55;margin:0 0 18px;max-width:64ch}
+.fm-panel{background:var(--panel,#fff);border:1px solid var(--border-2,#e2e8f0);border-radius:14px;padding:16px 16px 8px}
+.fm-panel svg{width:100%;height:auto;display:block;font-family:inherit}
+.fm-mock{max-width:360px;margin:22px auto 0}
+.fm-screen{border:1px solid var(--border-2,#e2e8f0);border-radius:14px;overflow:hidden;background:var(--panel,#fff);box-shadow:0 1px 4px rgba(15,23,42,.07)}
+.fm-bar{display:flex;align-items:center;gap:6px;padding:9px 12px;background:var(--bg-2,#f8fafc);border-bottom:1px solid var(--border-2,#e2e8f0)}
+.fm-bar i{width:9px;height:9px;border-radius:50%;background:var(--border-2,#cbd5e1);display:inline-block}
+.fm-bar span{margin-left:8px;font-size:12px;color:var(--ink-3,#64748b)}
+.fm-in{padding:14px 16px 16px}
+.fm-hi{margin:0 0 10px;font-size:14px;color:var(--ink,#0f172a)}
+.fm-row{display:flex;flex-direction:column;padding:7px 0;border-top:1px solid var(--border-2,#eef2f6)}
+.fm-row b{font-size:12.5px;color:var(--ink,#0f172a)}
+.fm-row em{font-style:normal;font-size:12px;color:var(--ink-3,#64748b)}
+.fm-chips{display:flex;flex-wrap:wrap;gap:6px;margin:13px 0 2px}
+.fm-chip{font-size:11.5px;border:1px solid var(--teal,#0d9488);color:var(--teal,#0d7a6f);background:var(--teal-soft,#f0fdfa);border-radius:999px;padding:4px 11px}
+.fm-skip{margin-top:13px;width:100%;border:0;border-radius:9px;padding:9px;background:var(--teal,#0d9488);color:#fff;font-size:13px;font-weight:600;cursor:default}
+.fm-cap{font-size:12px;color:var(--ink-3,#64748b);margin:12px 4px 0;line-height:1.55}
+</style>
+<div class="fm-art">
+  <p class="fm-k">The designed flow</p>
+  <p class="fm-lead">This is the artifact the workflow produces: the branch logic above, and the welcome screen below. It is the flow <em>as designed</em> &mdash; it shows the structure a team would build, not a shipped or user-tested feature, and it makes no claim yet that the flow has been validated with real users.</p>
+  <div class="fm-panel">
+    <svg viewBox="0 0 720 474" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Flow diagram: a new user opens the app and receives a linear welcome message with a skip option and tappable starter prompts; the user's first message then routes to one of three edge-case branches (distress, impossible request, or experienced user); every path ends in a useful output or a clear next step with no dead ends.">
+      <defs>
+        <marker id="fma" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto">
+          <path d="M0,0 L7,3.5 L0,7 Z" fill="var(--ink-3,#64748b)"/>
+        </marker>
+      </defs>
+      <!-- entry -->
+      <rect x="280" y="8" width="160" height="38" rx="9" fill="var(--bg-2,#f1f5f9)" stroke="var(--border-2,#e2e8f0)"/>
+      <text x="360" y="32" text-anchor="middle" font-size="13" fill="var(--ink,#0f172a)">New user, first open</text>
+      <line x1="360" y1="46" x2="360" y2="70" stroke="var(--ink-3,#64748b)" marker-end="url(#fma)"/>
+      <!-- welcome -->
+      <rect x="196" y="72" width="328" height="120" rx="12" fill="var(--teal-soft,#ccfbf1)" stroke="var(--teal,#0d9488)" stroke-width="1.5"/>
+      <text x="212" y="94" font-size="13" font-weight="700" fill="var(--teal,#0d7a6f)">Linear welcome &#183; the default path</text>
+      <text x="212" y="117" font-size="12" fill="var(--ink,#0f172a)">What I am &mdash; and that I&rsquo;m not a search engine</text>
+      <text x="212" y="136" font-size="12" fill="var(--ink,#0f172a)">Where I&rsquo;m strong &#183; my limits (no feelings, can be wrong)</text>
+      <text x="212" y="155" font-size="12" fill="var(--ink,#0f172a)">How to talk to me &mdash; good vs. bad prompts</text>
+      <text x="212" y="178" font-size="11.5" fill="var(--ink-3,#64748b)">scannable, ~60 seconds, section by section</text>
+      <!-- skip -->
+      <rect x="552" y="104" width="146" height="54" rx="10" fill="var(--panel,#ffffff)" stroke="var(--ink-3,#94a3b8)" stroke-dasharray="4 3"/>
+      <text x="625" y="127" text-anchor="middle" font-size="12" font-weight="600" fill="var(--ink,#0f172a)">Skip</text>
+      <text x="625" y="145" text-anchor="middle" font-size="11" fill="var(--ink-3,#64748b)">&ldquo;Got it, let&rsquo;s go&rdquo;</text>
+      <line x1="524" y1="130" x2="552" y2="130" stroke="var(--ink-3,#64748b)" marker-end="url(#fma)"/>
+      <!-- to starters -->
+      <line x1="360" y1="192" x2="360" y2="214" stroke="var(--ink-3,#64748b)" marker-end="url(#fma)"/>
+      <path d="M625,158 L625,236 L498,236" fill="none" stroke="var(--ink-3,#64748b)" marker-end="url(#fma)"/>
+      <!-- starters -->
+      <rect x="226" y="216" width="268" height="40" rx="9" fill="var(--bg-2,#f1f5f9)" stroke="var(--border-2,#cbd5e1)"/>
+      <text x="360" y="241" text-anchor="middle" font-size="12" fill="var(--ink,#0f172a)">Tappable starter prompts &mdash; a recipe to modify, not a blank box</text>
+      <line x1="360" y1="256" x2="360" y2="280" stroke="var(--ink-3,#64748b)" marker-end="url(#fma)"/>
+      <!-- decision -->
+      <text x="360" y="296" text-anchor="middle" font-size="12" font-weight="700" fill="var(--ink,#0f172a)">&hellip; then the user&rsquo;s first message routes the next turn</text>
+      <line x1="360" y1="301" x2="360" y2="306" stroke="var(--ink-3,#64748b)"/>
+      <line x1="129" y1="306" x2="591" y2="306" stroke="var(--ink-3,#64748b)"/>
+      <line x1="129" y1="306" x2="129" y2="314" stroke="var(--ink-3,#64748b)" marker-end="url(#fma)"/>
+      <line x1="360" y1="306" x2="360" y2="314" stroke="var(--ink-3,#64748b)" marker-end="url(#fma)"/>
+      <line x1="591" y1="306" x2="591" y2="314" stroke="var(--ink-3,#64748b)" marker-end="url(#fma)"/>
+      <!-- distress -->
+      <rect x="24" y="314" width="210" height="78" rx="10" fill="var(--panel,#fff)" stroke="var(--teal,#0d9488)"/>
+      <text x="36" y="335" font-size="12" font-weight="700" fill="var(--ink,#0f172a)">If it signals distress</text>
+      <text x="36" y="354" font-size="11.5" fill="var(--ink-3,#475569)">Acknowledge the person first,</text>
+      <text x="36" y="370" font-size="11.5" fill="var(--ink-3,#475569)">then point to real support.</text>
+      <text x="36" y="385" font-size="10.5" fill="var(--ink-3,#94a3b8)">how warm / how fast &mdash; a judgment call</text>
+      <!-- impossible -->
+      <rect x="255" y="314" width="210" height="78" rx="10" fill="var(--panel,#fff)" stroke="var(--border-2,#cbd5e1)"/>
+      <text x="267" y="335" font-size="12" font-weight="700" fill="var(--ink,#0f172a)">If it asks the impossible</text>
+      <text x="267" y="354" font-size="11.5" fill="var(--ink-3,#475569)">Explain why it can&rsquo;t,</text>
+      <text x="267" y="370" font-size="11.5" fill="var(--ink-3,#475569)">rather than attempting it.</text>
+      <!-- experienced -->
+      <rect x="486" y="314" width="210" height="78" rx="10" fill="var(--panel,#fff)" stroke="var(--border-2,#cbd5e1)"/>
+      <text x="498" y="335" font-size="12" font-weight="700" fill="var(--ink,#0f172a)">If the user&rsquo;s experienced</text>
+      <text x="498" y="354" font-size="11.5" fill="var(--ink-3,#475569)">Adjust depth,</text>
+      <text x="498" y="370" font-size="11.5" fill="var(--ink-3,#475569)">skip the basics.</text>
+      <!-- to terminal -->
+      <line x1="129" y1="392" x2="129" y2="414" stroke="var(--ink-3,#64748b)"/>
+      <line x1="360" y1="392" x2="360" y2="414" stroke="var(--ink-3,#64748b)"/>
+      <line x1="591" y1="392" x2="591" y2="414" stroke="var(--ink-3,#64748b)"/>
+      <line x1="129" y1="414" x2="591" y2="414" stroke="var(--ink-3,#64748b)"/>
+      <line x1="360" y1="414" x2="360" y2="430" stroke="var(--ink-3,#64748b)" marker-end="url(#fma)"/>
+      <!-- terminal -->
+      <rect x="150" y="432" width="420" height="36" rx="10" fill="var(--teal-soft,#ccfbf1)" stroke="var(--teal,#0d9488)" stroke-width="1.5"/>
+      <text x="360" y="455" text-anchor="middle" font-size="12.5" font-weight="600" fill="var(--teal,#0d7a6f)">Every path ends in a useful output or a clear next step &mdash; no dead ends</text>
+    </svg>
+  </div>
+  <div class="fm-mock">
+    <div class="fm-screen">
+      <div class="fm-bar"><i></i><i></i><i></i><span>first message &#183; welcome</span></div>
+      <div class="fm-in">
+        <p class="fm-hi">Hi &mdash; I&rsquo;m an AI assistant, and I&rsquo;m <b>not a search engine</b>.</p>
+        <div class="fm-row"><b>What I am</b><em>a thinking partner that works in language</em></div>
+        <div class="fm-row"><b>Where I&rsquo;m strong</b><em>writing, explaining, weighing decisions, code</em></div>
+        <div class="fm-row"><b>My limits</b><em>no feelings; whether I remember past chats depends on the product &amp; your settings; I can act in the world only if the product gives me tools; I can be confidently wrong</em></div>
+        <div class="fm-row"><b>How to talk to me</b><em>be clear, give context, leave room for &ldquo;I don&rsquo;t know&rdquo;</em></div>
+        <div class="fm-chips">
+          <span class="fm-chip">Draft an email to my landlord&hellip;</span>
+          <span class="fm-chip">Explain compound interest simply</span>
+          <span class="fm-chip">Weigh two job offers with me</span>
+        </div>
+        <button class="fm-skip" type="button" tabindex="-1" aria-hidden="true">Got it, let&rsquo;s go &rarr;</button>
+      </div>
+    </div>
+    <p class="fm-cap">The welcome screen itself: the default message, a visible skip, and tappable starters so the user never faces an empty box. Content here is the platform-neutral version of the message tested across four models in <a href="the-onboarding-problem.html">the case study</a>.</p>
+  </div>
+</div>
+<span class="kicker">Step 04</span>
+<h3><strong>Limits, Guardrails, and Safety</strong></h3>
+<p>Most AI interfaces bury their limits in documentation nobody reads, or surface them reactively — the model only tells you it can&#x27;t do something after you&#x27;ve already asked it to. This is backwards. Limits communicated upfront are boundaries. Limits discovered through failure are frustrations.</p>
+<p>The onboarding message was designed to surface hard boundaries explicitly: no feelings; no acting in the world unless the product gives me tools; no medical or legal advice; and memory only if the product and your settings enable it. These are stated as facts, not apologies. The framing matters — &quot;I can&#x27;t do this&quot; is more useful than &quot;I&#x27;m sorry, but I&#x27;m unable to...&quot;</p>
+<p>The bad prompt examples serve a specific safety function beyond teaching better prompting. They demonstrate the projection patterns documented in Contextual Drift in LLMs — the tendency to treat AI as a relationship, to seek emotional validation from a system that cannot provide it, to build dependency on something that doesn&#x27;t remember you exist. By showing users what these patterns look like before they develop, the onboarding message acts as an early intervention rather than a late correction.</p>
+<p>The prompt also included &quot;permission to say I don&#x27;t know&quot; language — framing that explicitly invites the model to express uncertainty rather than confabulating. This addresses the hallucination problem at the interaction level rather than the architecture level. Users who understand that confident-sounding output is not the same as accurate output are better equipped to use the tool responsibly.</p>
+<span class="kicker">Step 05</span>
+<h3><strong>Comparative Analysis and Iteration</strong></h3>
+<p>With four model responses in hand, I analyzed each output against the requirements the prompt specified. Did it explain what the system is? Did it distinguish itself from a search engine? Were the limits honest and non-apologetic? Were the good prompt examples specific enough to be immediately usable? Were the bad prompt examples realistic enough to be recognizable?</p>
+<p>Every model covered the core requirements; the differences were in emphasis. The per-model breakdown — which model leaned where — is in the case study, so I won&#x27;t restate it here. What the workflow takes from those differences is not a ranking but a design input: the same clean intent produced four functional messages, each inflected by its platform.</p>
+<p>These differences aren&#x27;t flaws. They&#x27;re design insights. A production onboarding message for Claude should lean into the ethical transparency that model does best. A production message for Grok should lean into the conversational energy that model does best. The workflow doesn&#x27;t produce one universal message. It produces a methodology for designing messages that are native to each platform while maintaining consistent coverage of the essential information.</p>
+<p><strong>Success criteria applied:</strong> Can a new user understand what the AI is and isn&#x27;t in under sixty seconds of reading? Would they know what to try first? Would they recognize a bad prompt before sending one? Does the message feel like a welcome page, not a wall of text? All four outputs passed these criteria, each in its own way.</p>
+<h2><strong>What This Workflow Demonstrates</strong></h2>
+<p>Ideas are easy. Turning them into something a team can build, test, and iterate on is the work. This workflow is the bridge between the systems-level thinking in my research and the concrete design artifact in the case study. It shows that I can move from problem identification to testable solution through a structured, repeatable process — not by following a template, but by building the methodology from the research itself.</p>
+<p>The research mapped what was broken. The case study showed the fix is buildable. This workflow is how a team would design it — carefully, repeatably, and honestly about where it still has to be proven.</p></div></article><div class="wrap"><a class="back-to-map" href="index.html">&larr; Back to the program map</a></div>
+</main>
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <div>&copy; 2026 Nora Murphy &middot; Independent AI research</div>
+    <nav aria-label="All sections"><a href="index.html">Home</a> <a href="the-literal-machine.html">The Literal Machine</a> <a href="the-onboarding-problem.html">The Onboarding Problem</a> <a href="from-research-to-first-message.html">From Research to First Message</a> <a href="the-human-measuring-stick.html">The Human Measuring Stick</a> <a href="contextual-drift-in-llms/index.html">Contextual Drift in LLMs</a> <a href="how-i-work.html">How I Work</a> <a href="lexicon.html">Lexicon</a> <a href="current-work.html">Current Work</a></nav>
+    <p class="footer-note">An earlier paper, <em>The Canyon</em>, is retired and not included here.</p>
+    <p class="build-stamp">Build 925ed09 · 2026-07-11</p>
+  </div>
+</footer>
+<script src="assets/site.js" defer></script>
+</body>
+</html>
