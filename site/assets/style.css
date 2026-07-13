@@ -540,9 +540,35 @@ sup.cite-src a:hover { background: var(--purple-soft); }
 .home-evidence p { font-size: 1.12rem; line-height: 1.72; margin: 0 0 1.55rem; color: var(--ink-2); }
 .home-evidence strong { color: var(--text); font-weight: 700; }
 .home-evidence mark.cite-span { color: var(--text); }
-.home-nav { max-width: var(--measure); margin: 2.2rem auto .5rem; font-size: .98rem; color: var(--text-muted); }
-.home-nav a { color: var(--accent); text-decoration: none; }
-.home-nav a:hover { color: var(--accent-strong); text-decoration: underline; text-underline-offset: 2px; }
+/* Destination cards: the invitation. Kept quieter than the quote section —
+   raised grounds, low-alpha accent borders. Motion-adjacent feedback is
+   allowed here and at the anchor-pulse, nowhere else. */
+.home-cards {
+  max-width: var(--measure); margin: 2.6rem auto .5rem;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+}
+.home-card {
+  display: flex; flex-direction: column; gap: .35rem;
+  background: var(--bg-raised);
+  border: 1px solid rgba(224,164,88,0.22);   /* low-alpha accent — universal, no color-mix */
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  text-decoration: none; color: var(--text);
+  transition: border-color .15s ease, transform .12s ease;
+}
+.home-card:hover, .home-card:focus-visible {
+  border-color: var(--accent); transform: translateY(-2px);
+}
+.home-card__title { font-family: var(--serif); font-weight: 600; font-size: 1.25rem; line-height: 1.2; letter-spacing: -.01em; }
+.home-card__desc { font-size: .92rem; line-height: 1.5; color: var(--text-muted); }
+/* Primary destination — a first-time visitor cannot miss it. */
+.home-card--primary { border-color: rgba(224,164,88,0.55); }
+.home-card--primary .home-card__title { color: var(--accent); }
+.home-card--primary:hover, .home-card--primary:focus-visible { border-color: var(--accent-strong); }
+@media (prefers-reduced-motion: reduce) {
+  .home-card { transition: border-color .15s ease, background .15s ease; }
+  .home-card:hover, .home-card:focus-visible { transform: none; }
+}
 
 /* ---------- Keyboard focus — visible, amber ---------- */
 a:focus-visible, button:focus-visible, summary:focus-visible,
@@ -565,4 +591,5 @@ a:focus-visible, button:focus-visible, summary:focus-visible,
   .doc-head { padding-top: 2.2rem; }
   .home-evidence p { font-size: 1.06rem; }
   .cite-transcript .turn--model { padding: .75rem .9rem .4rem; }
+  .home-cards { grid-template-columns: 1fr; }
 }
