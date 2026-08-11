@@ -513,14 +513,27 @@ mark.cite-span {
   box-decoration-break: clone; -webkit-box-decoration-break: clone;
   scroll-margin-top: 88px;
 }
-/* Signature: the anchor-landing moment — one soft pulse, ~600ms, once. */
+/* Active target: the span a [src] just landed on stays distinct in a field of
+   base marks — a brighter accent fill PLUS a 2px left bar. The bar is the
+   structural cue (base marks have none), so the signal survives without colour
+   for colour-blind readers; it rides an inset shadow so there's no layout shift
+   when it wraps. JS mirrors :target onto .active-cite for multi-element spans and
+   to guarantee exactly one active span at a time. */
+mark.cite-span:target,
+mark.cite-span.active-cite {
+  background: color-mix(in srgb, var(--accent-strong) 38%, transparent);
+  box-shadow: inset 0 -2px 0 0 var(--accent-strong),   /* brighter underline */
+              inset 2px 0 0 0 var(--accent-strong);     /* the 2px left bar */
+}
+/* Signature: the anchor-landing moment — one soft pulse, ~600ms, once — settling
+   INTO the persistent active fill (not back to base), so the pulse rides on top. */
 mark.cite-span:target { animation: cite-pulse 600ms ease-out 1; }
 @keyframes cite-pulse {
-  0%   { background: color-mix(in srgb, var(--accent-strong) 45%, transparent); }
-  100% { background: var(--mark-bg); }
+  0%   { background: color-mix(in srgb, var(--accent-strong) 58%, transparent); }
+  100% { background: color-mix(in srgb, var(--accent-strong) 38%, transparent); }
 }
 @media (prefers-reduced-motion: reduce) {
-  mark.cite-span:target { animation: none; background: color-mix(in srgb, var(--accent) 26%, transparent); }
+  mark.cite-span:target { animation: none; }   /* pulse suppressed; persistent active style stays */
 }
 sup.cite-src { line-height: 0; margin-left: 2px; white-space: nowrap; }
 sup.cite-src a {

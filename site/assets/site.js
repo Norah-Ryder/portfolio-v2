@@ -76,4 +76,30 @@
     });
     select(0);
   });
+
+  /* ---------- Active cite target: persistent highlight on the landed-on span ----------
+     Clicking a [src] sup deep-links to #cite-<log>-<id>. :target styles that mark, but
+     in a dense exhibit the landed-on span needs to stay distinct beyond the pulse. On
+     load and on every hashchange we resolve the fragment to its mark(s) and set
+     .active-cite — clearing the previous one so exactly one span is active at a time.
+     Each span is a single <mark> today; the data-span lookup keeps it correct if a
+     span ever renders as multiple slices. Works for C and X, and for arrivals from the
+     homepage hooks (the fragment is in the URL on load). Cosmetic only. */
+  var activeCite = [];
+  function setActiveCite() {
+    activeCite.forEach(function (el) { el.classList.remove("active-cite"); });
+    activeCite = [];
+    var id = (window.location.hash || "").replace(/^#/, "");
+    if (!id) return;
+    var els = [];
+    var el = document.getElementById(id);
+    if (el && el.classList && el.classList.contains("cite-span")) els.push(el);
+    Array.prototype.slice.call(document.querySelectorAll('[data-span="' + id + '"]')).forEach(function (s) {
+      if (els.indexOf(s) < 0) els.push(s);
+    });
+    els.forEach(function (s) { s.classList.add("active-cite"); });
+    activeCite = els;
+  }
+  window.addEventListener("hashchange", setActiveCite);
+  setActiveCite();
 })();
